@@ -18,15 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoCarbonTracker"
         tools:targetApi="31">
-        <activity
-            android:name=".Profile"
-            android:exported="false" />
-        <activity
-            android:name=".AverageCarbonFootprintUK"
-            android:exported="false" />
-        <activity
-            android:name=".CarbonFootprint"
-            android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -40,7 +32,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAQDm0UMye3O50Lg_QWsNENAaXfWtc8RV8" />
+            android:value="AIzaSyAzSwJjo2ggJk-Pv6euKuh_inpT1ZCHoFI" />
 
         <activity
             android:name=".MapsActivity"
