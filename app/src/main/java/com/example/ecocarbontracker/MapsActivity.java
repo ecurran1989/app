@@ -2,6 +2,13 @@ package com.example.ecocarbontracker;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+<<<<<<< HEAD
+=======
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+
+>>>>>>> caa48b6 (Initial commit)
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,15 +21,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+=======
+>>>>>>> caa48b6 (Initial commit)
 import com.example.ecocarbontracker.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+<<<<<<< HEAD
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,6 +48,14 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+=======
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.example.ecocarbontracker.databinding.ActivityMapsBinding;
+
+import java.io.IOException;
+>>>>>>> caa48b6 (Initial commit)
 import java.util.List;
 import java.util.Locale;
 
@@ -49,7 +68,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationManager lm;
     LocationListener locationListener;
     private ActivityMapsBinding binding;
+<<<<<<< HEAD
     private PlacesClient placesClient;
+=======
+>>>>>>> caa48b6 (Initial commit)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +80,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+<<<<<<< HEAD
         // Initialize Places API
         Places.initialize(getApplicationContext(), "AIzaSyAQDm0UMye3O50Lg_QWsNENAaXfWtc8RV8");
         placesClient = Places.createClient(this);
 
 
+=======
+>>>>>>> caa48b6 (Initial commit)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+<<<<<<< HEAD
 
         // Request both coarse and fine location permissions
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
         }, REQUEST_COARSE_ACCESS);
+=======
+>>>>>>> caa48b6 (Initial commit)
     }
 
 
@@ -80,19 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onPause() {
         super.onPause();
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-            }, REQUEST_COARSE_ACCESS);
-            return;
-        } else {
-            permissionGranted = true;
-        }
-        if(permissionGranted) {
-            lm.removeUpdates(locationListener);
+<<<<<<< HEAD
         if (lm != null && locationListener != null) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED
@@ -112,14 +128,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+=======
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+            }, REQUEST_COARSE_ACCESS);
+            return;
+        } else {
+            permissionGranted = true;
+        }
+        if(permissionGranted) {
+            lm.removeUpdates(locationListener);
+        }
+    }
+
+>>>>>>> caa48b6 (Initial commit)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_COARSE_ACCESS:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+<<<<<<< HEAD
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+=======
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+>>>>>>> caa48b6 (Initial commit)
                     permissionGranted = true;
                     if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED
@@ -159,16 +196,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
+<<<<<<< HEAD
         fetchNearbyRecyclingCenters();
 
+=======
+>>>>>>> caa48b6 (Initial commit)
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng point) {
 
+<<<<<<< HEAD
 
                 fetchPlaceDetails(point); // places
 
+=======
+>>>>>>> caa48b6 (Initial commit)
                 Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
                 try {
 
@@ -183,12 +226,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 12.0f));
                     }
                     Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                 } catch (IOException e) {
+=======
+                } catch (IOException e){
+>>>>>>> caa48b6 (Initial commit)
                     e.printStackTrace();
                 }
             }
         });
     }
+<<<<<<< HEAD
 
 
     // New method to fetch place details using Places API
@@ -351,6 +399,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+=======
+>>>>>>> caa48b6 (Initial commit)
     private class MyLocationListener implements LocationListener {
 
         @Override
@@ -380,7 +430,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .position(p)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .title(add));
+<<<<<<< HEAD
 
+=======
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 12.0f));
+>>>>>>> caa48b6 (Initial commit)
             }
         }
 
@@ -395,4 +449,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> caa48b6 (Initial commit)
