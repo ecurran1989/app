@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "744140423794",
+    "project_id": "fir-eco-54451",
+    "storage_bucket": "fir-eco-54451.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744140423794:android:b21cde356dfca2cc8b38eb",
+        "android_client_info": {
+          "package_name": "com.example.ecocarbontracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744140423794-td7j4mn9dp1d28ppv3pp3ipirufnjo0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecocarbontracker",
+            "certificate_hash": "cd5c4da1277dcae0194d5011f26ec61677926230"
+          }
+        },
+        {
+          "client_id": "744140423794-scpp0rfaf0n1lkmh5n8dj3ndf0jl3kp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgsfHK6vwfRdB5FbUhq_eBkCR3oSwtj9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744140423794-scpp0rfaf0n1lkmh5n8dj3ndf0jl3kp1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
