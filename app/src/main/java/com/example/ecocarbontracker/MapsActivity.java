@@ -53,6 +53,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Request both coarse and fine location permissions
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        }, REQUEST_COARSE_ACCESS);
     }
 
 
@@ -73,14 +79,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(permissionGranted) {
             lm.removeUpdates(locationListener);
+        if (lm != null && locationListener != null) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                }, REQUEST_COARSE_ACCESS);
+                return;
+            } else {
+                permissionGranted = true;
+            }
+            if (permissionGranted) {
+                lm.removeUpdates(locationListener);
+            }
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_COARSE_ACCESS:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     permissionGranted = true;
                     if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED
@@ -97,6 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 
 
     @Override

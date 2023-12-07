@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoCarbonTracker"
         tools:targetApi="31">
+
         <activity
             android:name=".Carbon"
             android:exported="false" />
@@ -45,6 +46,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAzSwJjo2ggJk-Pv6euKuh_inpT1ZCHoFI" />
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8ea30ed (Updated)
         <activity
             android:name=".MapsActivity"
             android:exported="false"
