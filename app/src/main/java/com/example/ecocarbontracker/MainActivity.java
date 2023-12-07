@@ -1,17 +1,16 @@
 package com.example.ecocarbontracker;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -28,15 +27,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-
+    private TextView name_txt;
+    private TextView email_txt;
     Button SignOut;
-    Button Api;
-    Button profileButton;
-    Button linksButton;
-
-
-
-
 
 
 
@@ -45,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
     }
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -58,47 +50,22 @@ public class MainActivity extends AppCompatActivity {
             }
     );
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
-
-
-        Button quizButton = findViewById(R.id.quiz_btn);
-        quizButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-                startActivity(intent);
-            }
-        });
-        mAuth = FirebaseAuth.getInstance();
         createSignInIntent();
 
-        SignOut = (Button) findViewById(R.id.btnSignOut);
-        SignOut.setBackgroundColor(Color.GREEN);
-        SignOut.setOnClickListener(new View.OnClickListener() {
-
+        SignOut = (Button)findViewById(R.id.btnSignOut);
+        SignOut.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-        Button openCarbonFootprintButton = findViewById(R.id.btnCarbonFootprint);
-        openCarbonFootprintButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCarbonFootprintActivity();
-            }
+            public void onClick(View v) { signOut(); }
         });
 
-
-
-
+        name_txt = findViewById(R.id.name_txt);
+        email_txt = findViewById(R.id.email_txt);
 
         Button maps_btn = (Button) findViewById(R.id.btnOpenMaps);
         maps_btn.setOnClickListener(new View.OnClickListener() {
@@ -108,57 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        Button carbonFootprintBtn = (Button) findViewById(R.id.btnCarbonFootprint);
-        carbonFootprintBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirectToCarbonFootprintActivity(view);
-            }
-        });
-
-        profileButton = findViewById(R.id.btnProfile);
-        linksButton = findViewById(R.id.btnLinks);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProfileActivity();
-            }
-        });
-
-        linksButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openLinksActivity();
-            }
-        });
-
-    }
-
-    private void openLinksActivity() {
-        Intent intent = new Intent(this, LinksActivity.class);
-        startActivity(intent);
-    }
-
-
-    private void openProfileActivity() {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-
-
-    private void openCarbonFootprintActivity() {
-        Intent intent = new Intent(this, CarbonFootprint.class);
-        startActivity(intent);
-    }
-
-
-    public void redirectToCarbonFootprintActivity(View view) {
-        Intent intent = new Intent(this, CarbonFootprint.class);
-        startActivity(intent);
     }
 
     public void createSignInIntent() {
+
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
@@ -167,39 +87,25 @@ public class MainActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.logo_new)
                 .build();
         signInLauncher.launch(signInIntent);
     }
-
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
+
+                name_txt.setText("Name: " + user.getDisplayName());
+                email_txt.setText("Email: " + user.getEmail());
+
                 Toast.makeText(this, "Sign in for (" + user.getEmail() + ") was successful", Toast.LENGTH_LONG).show();
-
-
-                saveUserInfo(user.getEmail(), user.getDisplayName());
-
-                // Navigate to Profile activity
-                Intent profileIntent = new Intent(MainActivity.this, Profile.class);
-                startActivity(profileIntent);
             }
         } else {
             Toast.makeText(this, "Failed Login", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void saveUserInfo(String userEmail, String userName) {
-        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_email", userEmail);
-        editor.putString("user_name", userName);
-        editor.apply();
-    }
-
 
     private void signOut() {
         AuthUI.getInstance()
