@@ -34,6 +34,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAzSwJjo2ggJk-Pv6euKuh_inpT1ZCHoFI" />
 
+
+
         <activity
             android:name=".MapsActivity"
             android:exported="false"
