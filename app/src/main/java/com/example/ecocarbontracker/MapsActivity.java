@@ -2,13 +2,10 @@ package com.example.ecocarbontracker;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-<<<<<<< HEAD
-=======
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
->>>>>>> caa48b6 (Initial commit)
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -21,41 +18,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
-=======
->>>>>>> caa48b6 (Initial commit)
 import com.example.ecocarbontracker.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-<<<<<<< HEAD
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
-import com.google.android.libraries.places.api.net.PlacesClient;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-=======
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.ecocarbontracker.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
->>>>>>> caa48b6 (Initial commit)
 import java.util.List;
 import java.util.Locale;
 
@@ -68,10 +41,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationManager lm;
     LocationListener locationListener;
     private ActivityMapsBinding binding;
-<<<<<<< HEAD
-    private PlacesClient placesClient;
-=======
->>>>>>> caa48b6 (Initial commit)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,27 +49,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-<<<<<<< HEAD
-        // Initialize Places API
-        Places.initialize(getApplicationContext(), "AIzaSyAQDm0UMye3O50Lg_QWsNENAaXfWtc8RV8");
-        placesClient = Places.createClient(this);
-
-
-=======
->>>>>>> caa48b6 (Initial commit)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-<<<<<<< HEAD
-
-        // Request both coarse and fine location permissions
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-        }, REQUEST_COARSE_ACCESS);
-=======
->>>>>>> caa48b6 (Initial commit)
     }
 
 
@@ -108,27 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onPause() {
         super.onPause();
 
-<<<<<<< HEAD
-        if (lm != null && locationListener != null) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION
-                }, REQUEST_COARSE_ACCESS);
-                return;
-            } else {
-                permissionGranted = true;
-            }
-            if (permissionGranted) {
-                lm.removeUpdates(locationListener);
-            }
-        }
-    }
-
-
-=======
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -145,18 +76,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
->>>>>>> caa48b6 (Initial commit)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_COARSE_ACCESS:
-<<<<<<< HEAD
-                if (grantResults.length > 0 &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-=======
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
->>>>>>> caa48b6 (Initial commit)
                     permissionGranted = true;
                     if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED
@@ -196,22 +120,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
-<<<<<<< HEAD
-        fetchNearbyRecyclingCenters();
-
-=======
->>>>>>> caa48b6 (Initial commit)
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng point) {
 
-<<<<<<< HEAD
-
-                fetchPlaceDetails(point); // places
-
-=======
->>>>>>> caa48b6 (Initial commit)
                 Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
                 try {
 
@@ -226,181 +139,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 12.0f));
                     }
                     Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-                } catch (IOException e) {
-=======
                 } catch (IOException e){
->>>>>>> caa48b6 (Initial commit)
                     e.printStackTrace();
                 }
             }
         });
     }
-<<<<<<< HEAD
-
-
-    // New method to fetch place details using Places API
-    private void fetchPlaceDetails(LatLng latLng) {
-        // Create a FindCurrentPlaceRequest
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(
-                Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
-        );
-
-        // Perform the place request
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        placesClient.findCurrentPlace(request).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FindCurrentPlaceResponse response = task.getResult();
-
-                if (response != null) {
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        Place place = placeLikelihood.getPlace();
-                        LatLng placeLatLng = place.getLatLng();
-
-                        // Check if the place is a recycling center
-                        if (isLikelyRecyclingCenter(place)) {
-                            // Add a marker for each nearby recycling center
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(placeLatLng)
-                                    .title(place.getName()));
-
-                            // Move the camera to the first nearby recycling center
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 12.0f));
-                            break; // Stop processing places after finding a recycling center
-                        }
-                    }
-                }
-            } else {
-                // Handle the error
-                Exception exception = task.getException();
-                if (exception != null) {
-                    Log.e("PlacesAPI", "Place request failed: " + exception.getMessage());
-                }
-            }
-        });
-    }
-
-
-    private void fetchNearbyRecyclingCenters() {
-        // Create a FindCurrentPlaceRequest for recycling centers
-
-        int searchRadius = 5000;
-
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(
-                Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.TYPES)
-        );
-
-        // Perform the place request
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        placesClient.findCurrentPlace(request).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FindCurrentPlaceResponse response = task.getResult();
-
-                if (response != null) {
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        Place place = placeLikelihood.getPlace();
-                        LatLng placeLatLng = new LatLng(
-                                place.getLatLng().latitude,
-                                place.getLatLng().longitude);
-
-                        // Check if the place is a recycling center
-                        if (isLikelyRecyclingCenter(place)) {
-                            // Add a marker for each nearby recycling center
-                            addCustomMarker(placeLatLng, place.getName());
-                        }
-                    }
-
-                    // Move the camera to the user's location
-                    LatLng initialCameraPosition = getLastKnownLocation();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialCameraPosition, 10.0f));
-                }
-            } else {
-                // Handle the error
-                Exception exception = task.getException();
-                if (exception != null) {
-                    Log.e("PlacesAPI", "Place request failed: " + exception.getMessage());
-                }
-            }
-        });
-    }
-
-    // Method to get the last known location
-    private LatLng getLastKnownLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return new LatLng(0, 0); // Default to (0, 0) if location permission is not granted
-        }
-        Location lastLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        return (lastLocation != null) ? new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()) : new LatLng(0, 0);
-    }
-
-    // Method to add a custom marker at a specific location
-    private void addCustomMarker(LatLng position, String title) {
-        // Customize the marker icon as needed (e.g., using a custom bitmap)
-        BitmapDescriptor customMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
-
-        // Add the marker to the map
-        mMap.addMarker(new MarkerOptions()
-                .position(position)
-                .title(title)
-                .icon(customMarker));
-    }
-
-
-    private boolean isLikelyRecyclingCenter(Place place) {
-        // Check if the place name or types contain the keyword "recycling"
-        boolean hasRecyclingKeyword = containsKeyword(place.getName(), "recycling", "theatre", "civic amenity", "bin", "skips", "waste");
-
-        // Check if the place types include POINT_OF_INTEREST or ESTABLISHMENT
-        List<Place.Type> recyclingTypes = Arrays.asList(
-                Place.Type.POINT_OF_INTEREST,
-                Place.Type.ESTABLISHMENT
-        );
-
-        List<Place.Type> placeTypes = place.getTypes();
-
-        // Return true if it has the recycling keyword and is one of the specified types
-        return hasRecyclingKeyword && placeTypes != null && !Collections.disjoint(placeTypes, recyclingTypes);
-    }
-    private boolean containsKeyword(String text, String... keywords) {
-        if (text == null) {
-            return false;
-        }
-        text = text.toLowerCase();
-        for (String keyword : keywords) {
-            if (text.contains(keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    // Helper method to check if a place has a specific type
-    private boolean hasPlaceType(Place place, Place.Type type) {
-        return place != null && place.getTypes() != null && place.getTypes().contains(type);
-    }
-
-    // Helper method to check if a place has a specific subtype
-    private boolean hasPlaceSubtype(Place place, Place.Type subtype) {
-        return place != null && place.getTypes() != null && place.getTypes().contains(subtype);
-    }
-
-
-    // Helper method to check if a place has a specific type
-    private boolean isPlaceType(Place place, Place.Type type) {
-        return place != null && place.getTypes() != null && place.getTypes().contains(type);
-    }
-
-
-
-
-
-=======
->>>>>>> caa48b6 (Initial commit)
     private class MyLocationListener implements LocationListener {
 
         @Override
@@ -430,11 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .position(p)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .title(add));
-<<<<<<< HEAD
-
-=======
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 12.0f));
->>>>>>> caa48b6 (Initial commit)
             }
         }
 
@@ -449,9 +189,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-<<<<<<< HEAD
-}
-=======
 }
 
->>>>>>> caa48b6 (Initial commit)
