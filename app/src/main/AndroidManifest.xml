@@ -18,7 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoCarbonTracker"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Carbon"
+            android:exported="false" />
+        <activity
+            android:name=".Api"
+            android:exported="false" />
+        <activity
+            android:name=".AchievementsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AchievementsActivity">
+
+    <EditText
+        android:id="@+id/level5txt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Level 5"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/level5Image"
+        app:layout_constraintEnd_toStartOf="@+id/level2Text"
+        app:layout_constraintStart_toEndOf="@+id/level3Image"
+        app:layout_constraintTop_toBottomOf="@+id/level4Image" />
+
+    <EditText
+        android:id="@+id/level4Text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="93dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Level 4"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/level4Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/level3Text"
+        app:layout_constraintTop_toBottomOf="@+id/level2Image" />
+
+    <EditText
+        android:id="@+id/level3Text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="98dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Level 3"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/level3Image"
+        app:layout_constraintEnd_toStartOf="@+id/level4Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level1Image" />
+
+    <EditText
+        android:id="@+id/level2Text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Level 2"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/level2Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/level1Text"
+        app:layout_constraintTop_toBottomOf="@+id/CurrentLevelText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="26dp"
+        android:text="Levels Unlocked"
+        app:layout_constraintBottom_toTopOf="@+id/CurrentLevelText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/level1Image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="30dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/level3Text"
+        app:layout_constraintEnd_toStartOf="@+id/level2Image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level1Text"
+        app:srcCompat="@drawable/level1" />
+
+    <ImageView
+        android:id="@+id/level2Image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="30dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/level4Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/level1Image"
+        app:layout_constraintTop_toBottomOf="@+id/level2Text"
+        app:srcCompat="@drawable/level2" />
+
+    <ImageView
+        android:id="@+id/level3Image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="347dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/level4Image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level3Text"
+        app:srcCompat="@drawable/level3" />
+
+    <ImageView
+        android:id="@+id/level4Image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginBottom="32dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/level5txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/level3Image"
+        app:layout_constraintTop_toBottomOf="@+id/level4Text"
+        app:srcCompat="@drawable/level4" />
+
+    <ImageView
+        android:id="@+id/level5Image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="214dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/level5txt"
+        app:layout_constraintStart_toStartOf="@+id/level5txt"
+        app:layout_constraintTop_toBottomOf="@+id/level5txt"
+        app:srcCompat="@drawable/level5" />
+
+    <TextView
+        android:id="@+id/CurrentLevelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/level2Text"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/level1Text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginBottom="359dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Level 1"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/returnMainButton"
+        app:layout_constraintEnd_toStartOf="@+id/level2Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/returnMainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="120dp"
+        android:text="Main Page"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/returnQuizButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level1Text" />
+
+    <Button
+        android:id="@+id/returnQuizButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:text="Back to Quiz"
+        app:layout_constraintBaseline_toBaselineOf="@+id/returnMainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/returnMainButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>

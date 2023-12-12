@@ -43,4 +43,13 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btnSignOut"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/quiz_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignOut" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
