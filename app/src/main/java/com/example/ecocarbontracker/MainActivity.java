@@ -1,16 +1,17 @@
 package com.example.ecocarbontracker;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -27,10 +28,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private TextView name_txt;
-    private TextView email_txt;
+
     Button SignOut;
     Button Api;
+
+
 
 
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -69,14 +72,26 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         createSignInIntent();
 
-        SignOut = (Button)findViewById(R.id.btnSignOut);
-        SignOut.setOnClickListener(new View.OnClickListener(){
+        SignOut = (Button) findViewById(R.id.btnSignOut);
+        SignOut.setBackgroundColor(Color.GREEN);
+        SignOut.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) { signOut(); }
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+        Button openCarbonFootprintButton = findViewById(R.id.btnCarbonFootprint);
+        openCarbonFootprintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCarbonFootprintActivity();
+            }
         });
 
-        name_txt = findViewById(R.id.name_txt);
-        email_txt = findViewById(R.id.email_txt);
+
+
+
 
         Button maps_btn = (Button) findViewById(R.id.btnOpenMaps);
         maps_btn.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +101,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button carbonFootprintBtn = (Button) findViewById(R.id.btnCarbonFootprint);
+        carbonFootprintBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectToCarbonFootprintActivity(view);
+            }
+        });
+    }
+
+    private void openCarbonFootprintActivity() {
+        Intent intent = new Intent(this, CarbonFootprint.class);
+        startActivity(intent);
+    }
+
+
+    public void redirectToCarbonFootprintActivity(View view) {
+        Intent intent = new Intent(this, CarbonFootprint.class);
+        startActivity(intent);
     }
 
     public void createSignInIntent() {
@@ -98,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setLogo(R.drawable.logo_1)
                 .build();
         signInLauncher.launch(signInIntent);
     }
@@ -108,8 +143,7 @@ public class MainActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
 
-                name_txt.setText("Name: " + user.getDisplayName());
-                email_txt.setText("Email: " + user.getEmail());
+
 
                 Toast.makeText(this, "Sign in for (" + user.getEmail() + ") was successful", Toast.LENGTH_LONG).show();
             }
