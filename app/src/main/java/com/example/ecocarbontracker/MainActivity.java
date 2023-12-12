@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView name_txt;
     private TextView email_txt;
     Button SignOut;
+    Button Api;
 
 
 
@@ -55,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        Button quizButton = findViewById(R.id.quiz_btn);
+        quizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+                startActivity(intent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         createSignInIntent();
 
