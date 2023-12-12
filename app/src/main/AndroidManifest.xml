@@ -18,18 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoCarbonTracker"
         tools:targetApi="31">
-
         <activity
-            android:name=".Carbon"
+            android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".Api"
+            android:name=".AverageCarbonFootprintUK"
             android:exported="false" />
         <activity
-            android:name=".AchievementsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".QuizActivity"
+            android:name=".CarbonFootprint"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -44,13 +40,8 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAzSwJjo2ggJk-Pv6euKuh_inpT1ZCHoFI" />
+            android:value="AIzaSyAQDm0UMye3O50Lg_QWsNENAaXfWtc8RV8" />
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8ea30ed (Updated)
         <activity
             android:name=".MapsActivity"
             android:exported="false"
