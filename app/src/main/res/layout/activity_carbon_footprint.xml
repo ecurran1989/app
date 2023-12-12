@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carbon Footprint Calculator"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/editTextMilesDriven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter miles driven"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/textViewTitle"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextKWhUsed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter kWh used"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/editTextMilesDriven"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextMeatConsumed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextKWhUsed"
+        android:layout_marginTop="16dp"
+        android:hint="Enter g of meat consumed"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:layout_below="@id/editTextMeatConsumed"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result will be displayed here"
+        android:textSize="18sp"
+        android:layout_below="@id/buttonCalculate"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonAverage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View UK Average"
+        android:layout_below="@id/textViewResult"
+        android:layout_marginTop="16dp" />
+
+
+
+</RelativeLayout>
