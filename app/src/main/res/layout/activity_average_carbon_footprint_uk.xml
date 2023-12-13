@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#90F693">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -12,7 +13,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/textViewAverageFootprint"
@@ -21,7 +23,8 @@
         android:text="TextView"
         android:textSize="18sp"
         android:layout_below="@id/textViewTitle"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/textViewAverageResult"
@@ -30,6 +33,7 @@
         android:text="Result will be displayed here"
         android:textSize="18sp"
         android:layout_below="@id/textViewAverageFootprint"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textColor="#000000" />
 
 </RelativeLayout>
