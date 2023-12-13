@@ -5,6 +5,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -50,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationListener locationListener;
     private ActivityMapsBinding binding;
     private PlacesClient placesClient;
+    private Toast locationToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,74 +225,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void fetchNearbyRecyclingCenters() {
-        // Create a FindCurrentPlaceRequest for recycling centers
+        // Define keywords for recycling centers
+        List<String> keywordList = Arrays.asList("recycling", "civic amenity", "bin", "skips", "waste");
 
-        int searchRadius = 5000;
+        // Iterate through keywords and fetch places
+        for (String keyword : keywordList) {
+            // Create a FindCurrentPlaceRequest for the current keyword
+            FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(
+                    Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.TYPES)
+            );
 
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(
-                Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.TYPES)
-        );
+            // Perform the place request
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Handle the case where the user hasn't granted the location permission.
+                return;
+            }
+            placesClient.findCurrentPlace(request).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    FindCurrentPlaceResponse response = task.getResult();
 
-        // Perform the place request
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        placesClient.findCurrentPlace(request).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FindCurrentPlaceResponse response = task.getResult();
+                    if (response != null) {
+                        for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+                            Place place = placeLikelihood.getPlace();
+                            LatLng placeLatLng = new LatLng(
+                                    place.getLatLng().latitude,
+                                    place.getLatLng().longitude);
 
-                if (response != null) {
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        Place place = placeLikelihood.getPlace();
-                        LatLng placeLatLng = new LatLng(
-                                place.getLatLng().latitude,
-                                place.getLatLng().longitude);
-
-                        // Check if the place is a recycling center
-                        if (isLikelyRecyclingCenter(place)) {
-                            // Add a marker for each nearby recycling center
-                            addCustomMarker(placeLatLng, place.getName());
+                            // Check if the place is a recycling center
+                            if (isLikelyRecyclingCenter(place)) {
+                                // Add a custom marker for each nearby recycling center
+                                addCustomMarker(placeLatLng, place.getName());
+                            }
                         }
                     }
-
-                    // Move the camera to the user's location
-                    LatLng initialCameraPosition = getLastKnownLocation();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialCameraPosition, 10.0f));
+                } else {
+                    // Handle the error
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        Log.e("PlacesAPI", "Place request failed: " + exception.getMessage());
+                    }
                 }
-            } else {
-                // Handle the error
-                Exception exception = task.getException();
-                if (exception != null) {
-                    Log.e("PlacesAPI", "Place request failed: " + exception.getMessage());
-                }
-            }
-        });
-    }
-
-    // Method to get the last known location
-    private LatLng getLastKnownLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return new LatLng(0, 0); // Default to (0, 0) if location permission is not granted
+            });
         }
-        Location lastLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        return (lastLocation != null) ? new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()) : new LatLng(0, 0);
-    }
 
-    // Method to add a custom marker at a specific location
-    private void addCustomMarker(LatLng position, String title) {
-        // Customize the marker icon as needed (e.g., using a custom bitmap)
-        BitmapDescriptor customMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
-
-        // Add the marker to the map
-        mMap.addMarker(new MarkerOptions()
-                .position(position)
-                .title(title)
-                .icon(customMarker));
+        // Move the camera to the user's location
+        LatLng userLocation = getLastKnownLocation();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10.0f));
     }
 
 
+
+
+
+
+
+    // Method to check if the place is likely a recycling center
     private boolean isLikelyRecyclingCenter(Place place) {
-        // Check if the place name or types contain the keyword "recycling"
+        // Check if the place name or types contain any of the specified keywords
         boolean hasRecyclingKeyword = containsKeyword(place.getName(), "recycling", "civic amenity", "bin", "skips", "waste");
 
         // Check if the place types include POINT_OF_INTEREST or ESTABLISHMENT
@@ -303,18 +295,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Return true if it has the recycling keyword and is one of the specified types
         return hasRecyclingKeyword && placeTypes != null && !Collections.disjoint(placeTypes, recyclingTypes);
     }
+
+    // Method to add a custom marker at a specific location
+    private void addCustomMarker(LatLng position, String title) {
+        // Customize the marker icon as needed (e.g., using a custom bitmap)
+        BitmapDescriptor customMarker = BitmapDescriptorFactory.fromResource(R.drawable.green_marker); // Replace with your custom marker icon
+        int height = 100;
+        int width = 100;
+
+        // Create a new Bitmap from the customMarker
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.green_marker);
+        Bitmap smallMarker = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+
+        // Add the scaled marker to the map
+        mMap.addMarker(new MarkerOptions()
+                .position(position)
+                .title(title)
+                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+    }
+
+
+
+
+
+    // Method to get the last known location
+    private LatLng getLastKnownLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return new LatLng(0, 0); // Default to (0, 0) if location permission is not granted
+        }
+        Location lastLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        return (lastLocation != null) ? new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()) : new LatLng(0, 0);
+    }
+
+    // Method to add a custom marker at a specific location
+
+
+
+
     private boolean containsKeyword(String text, String... keywords) {
         if (text == null) {
             return false;
         }
-        text = text.toLowerCase();
+        text = text.toLowerCase(); // Convert text to lowercase for case-insensitive comparison
         for (String keyword : keywords) {
-            if (text.contains(keyword)) {
+            if (text.contains(keyword.toLowerCase())) {
                 return true;
             }
         }
         return false;
     }
+
 
 
 
@@ -342,9 +372,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onLocationChanged(Location location) {
             if (location != null) {
-                Toast.makeText(getBaseContext(),
-                        "Current Location : Lat " + location.getLatitude() +
-                                " Lng: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+                String toastMessage = "Current Location: Lat " + location.getLatitude() +
+                        " Lng: " + location.getLongitude();
+
+                // Cancel the previous toast if it exists
+                if (locationToast != null) {
+                    locationToast.cancel();
+                }
+
+                // Show the new toast
+                locationToast = Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_SHORT);
+                locationToast.show();
 
                 LatLng p = new LatLng(location.getLatitude(), location.getLongitude());
 
