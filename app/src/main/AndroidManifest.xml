@@ -49,9 +49,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity android:name=".QuizActivity"
+            android:exported="false"/>
+        <activity android:name=".AchievementsActivity"
+            android:exported="false"/>
         <activity
             android:name=".SplashScreen"
             android:exported="true">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

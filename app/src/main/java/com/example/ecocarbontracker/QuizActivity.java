@@ -103,7 +103,7 @@ public class QuizActivity extends AppCompatActivity {
             score = 0;
             highScore = 0;
             updateHighScore();
-            highScoreTextView.setText("High Score: " + highScore);
+            highScoreTextView.setText("High Score: "+highScore);
 
         }
 
