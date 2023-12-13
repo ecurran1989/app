@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -30,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     Button SignOut;
+    Button Api;
+    Button profileButton;
+    Button linksButton;
+
+
 
 
 
@@ -58,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        Button quizButton = findViewById(R.id.quiz_btn);
+        quizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+                startActivity(intent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         createSignInIntent();
 
@@ -98,7 +112,36 @@ public class MainActivity extends AppCompatActivity {
                 redirectToCarbonFootprintActivity(view);
             }
         });
+
+        profileButton = findViewById(R.id.btnProfile);
+        linksButton = findViewById(R.id.btnLinks);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfileActivity();
+            }
+        });
+
+        linksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLinksActivity();
+            }
+        });
+
     }
+
+    private void openLinksActivity() {
+        Intent intent = new Intent(this, LinksActivity.class);
+        startActivity(intent);
+    }
+
+
+    private void openProfileActivity() {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
 
     private void openCarbonFootprintActivity() {
         Intent intent = new Intent(this, CarbonFootprint.class);

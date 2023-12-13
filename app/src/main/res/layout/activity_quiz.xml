@@ -34,14 +34,14 @@
             style="@style/Widget.Material3.Button.TonalButton.Icon"
             android:layout_width="172dp"
             android:layout_height="45dp"
-            android:layout_marginTop="670dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="16dp"
             android:background="#06A1E8"
             android:text="Achievements"
             android:textAlignment="center"
-            android:textColor="@color/text_selector_black"
             android:textSize="12sp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="104dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/highScoreTextView"
@@ -57,7 +57,6 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:text="Reset High Score"
-            android:textColor="@color/text_selector"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/highScoreTextView" />
@@ -69,9 +68,9 @@
             android:text="Question Placeholder"
             android:textAlignment="center"
             android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/resetHighScoreButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resetHighScoreButton" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <RadioGroup
             android:id="@+id/optionsRadioGroup"
@@ -88,10 +87,9 @@
             android:layout_height="0dp"
             android:onClick="onAnswerSubmit"
             android:text="Submit Answer"
-            android:textColor="@color/text_selector"
+            app:layout_constraintTop_toBottomOf="@+id/optionsRadioGroup"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/optionsRadioGroup" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/scoreTextView"
@@ -107,17 +105,13 @@
             style="@style/Widget.Material3.Button"
             android:layout_width="146dp"
             android:layout_height="36dp"
-            android:layout_marginStart="139dp"
-            android:layout_marginEnd="127dp"
-            android:layout_marginBottom="160dp"
+            android:layout_marginEnd="124dp"
+            android:layout_marginBottom="36dp"
             android:background="#DF1616"
             android:text="Restart"
-            android:textAlignment="center"
-            android:textColor="@color/text_selector"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

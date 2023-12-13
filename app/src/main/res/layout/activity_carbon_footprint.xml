@@ -51,13 +51,13 @@
         android:layout_below="@id/editTextMeatConsumed"
         android:layout_marginTop="16dp"
         android:background="#4CAF50"
-        android:textColor="@color/text_selector" />
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Result will be displayed here"
         android:textSize="18sp"
         android:layout_below="@id/buttonCalculate"
         android:layout_marginTop="16dp"
@@ -71,6 +71,6 @@
         android:layout_below="@id/textViewResult"
         android:layout_marginTop="16dp"
         android:background="#4CAF50"
-        android:textColor="@color/text_selector" />
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
