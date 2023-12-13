@@ -1,15 +1,12 @@
 package com.example.ecocarbontracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AchievementsActivity extends AppCompatActivity {
     private int userLevel;
@@ -47,10 +44,12 @@ public class AchievementsActivity extends AppCompatActivity {
         mainpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AchievementsActivity.this,MainActivity.class);
+                Intent intent = new Intent(AchievementsActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
+
 
         // Display images based on userLevel
         displayImages(userLevel);
