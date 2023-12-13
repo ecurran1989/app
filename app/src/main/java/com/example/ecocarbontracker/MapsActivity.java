@@ -290,7 +290,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private boolean isLikelyRecyclingCenter(Place place) {
         // Check if the place name or types contain the keyword "recycling"
-        boolean hasRecyclingKeyword = containsKeyword(place.getName(), "recycling", "theatre", "civic amenity", "bin", "skips", "waste");
+        boolean hasRecyclingKeyword = containsKeyword(place.getName(), "recycling", "civic amenity", "bin", "skips", "waste");
 
         // Check if the place types include POINT_OF_INTEREST or ESTABLISHMENT
         List<Place.Type> recyclingTypes = Arrays.asList(
