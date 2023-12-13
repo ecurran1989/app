@@ -188,7 +188,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/returnQuizButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/level1Text" />
+        app:layout_constraintTop_toBottomOf="@+id/level1Text"
+        android:textColor="@color/text_selector"/>
 
     <Button
         android:id="@+id/returnQuizButton"
@@ -198,5 +199,6 @@
         android:text="Back to Quiz"
         app:layout_constraintBaseline_toBaselineOf="@+id/returnMainButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/returnMainButton" />
+        app:layout_constraintStart_toEndOf="@+id/returnMainButton"
+        android:textColor="@color/text_selector"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,7 @@
         android:layout_marginTop="33dp"
         android:background="#06A1E8"
         android:text="UNICEF Environment and Climate Change"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/text_selector" />
 
     <Button
 android:id="@+id/buttonUN"
@@ -37,7 +37,7 @@ android:layout_below="@id/buttonUnicef"
 android:layout_marginTop="16dp"
 android:text="UN Net-Zero Coalition"
 android:background="#06A1E8"
-android:textColor="#FFFFFF"
+        android:textColor="@color/text_selector"
     />
 
 <Button
@@ -46,9 +46,9 @@ android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:layout_below="@id/buttonUN"
 android:layout_marginTop="16dp"
-android:text="Cambridge Carbon Footprint"
+android:text="Carbon Footprint Goals"
 android:background="#06A1E8"
-android:textColor="#FFFFFF"
+    android:textColor="@color/text_selector"
     />
 
 <Button
@@ -59,7 +59,7 @@ android:layout_below="@id/buttonCambridge"
 android:layout_marginTop="16dp"
 android:text="What you can do to make a difference!"
 android:background="#06A1E8"
-android:textColor="#FFFFFF"
+    android:textColor="@color/text_selector"
     />
 
     </RelativeLayout>

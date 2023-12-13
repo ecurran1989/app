@@ -12,12 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="535dp"
         android:text="Eco Carbon Tracker"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,10 +71,10 @@
         <Button
             android:id="@+id/quiz_btn"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="67dp"
+            android:layout_width="92dp"
             android:layout_height="59dp"
             android:background="#4CAF50"
-            android:text="Quiz"
+            android:text="EcoQuiz"
             android:textAlignment="viewStart"
             android:textColor="@color/text_selector" />
 
@@ -105,13 +105,31 @@
             android:textAlignment="viewStart"
             android:textColor="@color/text_selector" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <Button
+            android:id="@+id/btnSignOut"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="243dp"
+            android:layout_marginBottom="114dp"
+            android:background="#4CAF50"
+            android:text="Sign Out"
+            android:textAlignment="viewStart"
+            android:textColor="@color/text_selector" />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="503dp"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="111dp"
+        android:layout_marginEnd="7dp"
         android:layout_marginBottom="111dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -176,21 +194,5 @@
             app:srcCompat="@drawable/signouticon" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnSignOut"
-        style="@style/Widget.Material3.Button.IconButton"
-        android:layout_width="85dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="269dp"
-        android:layout_marginBottom="119dp"
-        android:background="#4CAF50"
-        android:text="Sign Out"
-        android:textAlignment="viewStart"
-        android:textColor="@color/text_selector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
