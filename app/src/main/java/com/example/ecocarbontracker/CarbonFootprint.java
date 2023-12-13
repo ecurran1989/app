@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DecimalFormat;
+
 public class CarbonFootprint extends AppCompatActivity {
 
-    private TextView textViewResult, textViewAverageFootprint;;
+    private TextView textViewResult, textViewAverageFootprint;
+    ;
     private EditText editTextMiles, editTextEnergy, editTextMeat;
-
 
 
     @Override
@@ -43,10 +45,26 @@ public class CarbonFootprint extends AppCompatActivity {
         buttonAverage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(CarbonFootprint.this, com.example.ecocarbontracker.AverageCarbonFootprintUK.class);
+                Intent i = new Intent(CarbonFootprint.this, AverageCarbonFootprintUK.class);
+
+                // Get user input and calculate total footprint
+                double milesDriven = Double.parseDouble(editTextMiles.getText().toString());
+                double kWhUsed = Double.parseDouble(editTextEnergy.getText().toString());
+                double meatConsumed = Double.parseDouble(editTextMeat.getText().toString());
+
+                double transportationFootprint = CarbonFootprintCalculator.calculateTransportationFootprint(milesDriven);
+                double energyFootprint = CarbonFootprintCalculator.calculateEnergyFootprint(kWhUsed);
+                double dietFootprint = CarbonFootprintCalculator.calculateDietFootprint(meatConsumed);
+
+                double totalFootprint = transportationFootprint + energyFootprint + dietFootprint;
+
+                // Add the user's total footprint to the intent
+                i.putExtra("userFootprint", totalFootprint);
+
                 startActivity(i);
             }
         });
+
     }
 
 
@@ -64,6 +82,14 @@ public class CarbonFootprint extends AppCompatActivity {
         // Calculate total footprint
         double totalFootprint = (transportationFootprint + energyFootprint + dietFootprint);
 
+        // Format the values to 2 decimal places
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        transportationFootprint = Double.parseDouble(decimalFormat.format(transportationFootprint));
+        energyFootprint = Double.parseDouble(decimalFormat.format(energyFootprint));
+        dietFootprint = Double.parseDouble(decimalFormat.format(dietFootprint));
+        totalFootprint = Double.parseDouble(decimalFormat.format(totalFootprint));
+
+
         // Display individual results
         textViewResult.setText(
                 "Transportation Footprint: " + transportationFootprint + " kg CO2\n" +
@@ -78,5 +104,4 @@ public class CarbonFootprint extends AppCompatActivity {
         Log.d("CarbonFootprint", "Diet Footprint: " + dietFootprint + " kg CO2");
         Log.d("CarbonFootprint", "Total Carbon Footprint: " + totalFootprint + " kg CO2");
     }
-
 }

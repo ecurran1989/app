@@ -1,6 +1,7 @@
 package com.example.ecocarbontracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -57,10 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
     );
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -155,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createSignInIntent() {
-
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
@@ -164,25 +167,39 @@ public class MainActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.logo_1)
+                .setLogo(R.drawable.logo_new)
                 .build();
         signInLauncher.launch(signInIntent);
     }
+
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
-
-
-
                 Toast.makeText(this, "Sign in for (" + user.getEmail() + ") was successful", Toast.LENGTH_LONG).show();
+
+
+                saveUserInfo(user.getEmail(), user.getDisplayName());
+
+                // Navigate to Profile activity
+                Intent profileIntent = new Intent(MainActivity.this, Profile.class);
+                startActivity(profileIntent);
             }
         } else {
             Toast.makeText(this, "Failed Login", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void saveUserInfo(String userEmail, String userName) {
+        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_email", userEmail);
+        editor.putString("user_name", userName);
+        editor.apply();
+    }
+
 
     private void signOut() {
         AuthUI.getInstance()

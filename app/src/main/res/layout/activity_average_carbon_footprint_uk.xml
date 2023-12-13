@@ -9,7 +9,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carbon Footprint Calculator"
+        android:text="Average Daily Carbon Footprint in the UK"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
@@ -35,5 +35,25 @@
         android:layout_below="@id/textViewAverageFootprint"
         android:layout_marginTop="16dp"
         android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/textViewComparisonMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAverageResult"
+        android:layout_marginTop="16dp"
+        android:text="Compare Message"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonLinks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Explore Links"
+        android:layout_marginTop="16dp"
+        android:onClick="openLinksActivity"
+        android:layout_below="@id/textViewComparisonMessage"/>
 
 </RelativeLayout>
