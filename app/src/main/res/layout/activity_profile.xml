@@ -63,5 +63,16 @@
         app:layout_constraintStart_toStartOf="@+id/name_txt"
         app:layout_constraintTop_toBottomOf="@+id/name_txt" />
 
+    <Button
+        android:id="@+id/menu_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="305dp"
+        android:text="Menu"
+        android:textColor="@color/text_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

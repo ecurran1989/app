@@ -36,7 +36,7 @@ public class CarbonFootprint extends AppCompatActivity {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Call a method to perform the calculation and update the result
+
                 calculateAndDisplayResult();
 
             }
@@ -82,7 +82,7 @@ public class CarbonFootprint extends AppCompatActivity {
         // Calculate total footprint
         double totalFootprint = (transportationFootprint + energyFootprint + dietFootprint);
 
-        // Format the values to 2 decimal places
+
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         transportationFootprint = Double.parseDouble(decimalFormat.format(transportationFootprint));
         energyFootprint = Double.parseDouble(decimalFormat.format(energyFootprint));

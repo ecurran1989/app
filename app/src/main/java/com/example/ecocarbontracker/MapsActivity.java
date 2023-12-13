@@ -317,18 +317,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    // Helper method to check if a place has a specific type
+
     private boolean hasPlaceType(Place place, Place.Type type) {
         return place != null && place.getTypes() != null && place.getTypes().contains(type);
     }
 
-    // Helper method to check if a place has a specific subtype
+
     private boolean hasPlaceSubtype(Place place, Place.Type subtype) {
         return place != null && place.getTypes() != null && place.getTypes().contains(subtype);
     }
 
 
-    // Helper method to check if a place has a specific type
+
     private boolean isPlaceType(Place place, Place.Type type) {
         return place != null && place.getTypes() != null && place.getTypes().contains(type);
     }

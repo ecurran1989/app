@@ -15,13 +15,12 @@ public class LinksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_links);
 
-        // Find buttons by ID
+
         Button buttonUnicef = findViewById(R.id.buttonUnicef);
         Button buttonUN = findViewById(R.id.buttonUN);
         Button buttonCambridge = findViewById(R.id.buttonCambridge);
         Button buttonImperial = findViewById(R.id.buttonImperial);
-
-        // Set click listeners for each button
+        
         buttonUnicef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

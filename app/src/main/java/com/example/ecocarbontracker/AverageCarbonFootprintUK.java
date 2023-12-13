@@ -22,7 +22,7 @@ public class AverageCarbonFootprintUK extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_average_carbon_footprint_uk);
 
-        // Find TextViews by their IDs
+
         textViewAverageFootprint = findViewById(R.id.textViewAverageFootprint);
         textViewAverageResult = findViewById(R.id.textViewAverageResult);
         textViewComparisonMessage = findViewById(R.id.textViewComparisonMessage);
@@ -31,7 +31,7 @@ public class AverageCarbonFootprintUK extends AppCompatActivity {
 
         calculateAndDisplayResult();
 
-        // Set movement method and apply HTML formatting
+
         textViewAverageResult.setMovementMethod(LinkMovementMethod.getInstance());
         textViewAverageResult.setText(Html.fromHtml(textViewAverageResult.getText().toString()));
 
@@ -56,7 +56,7 @@ public class AverageCarbonFootprintUK extends AppCompatActivity {
         double averagekWh = 7.94;
         double averageMeat = 86.3;
 
-        // Display average values
+
         textViewAverageFootprint.setText(
                 "Average Transportation: " + averageMiles + " miles\n" +
                         "Average Energy: " + averagekWh + " kWh\n" +
@@ -104,7 +104,7 @@ public class AverageCarbonFootprintUK extends AppCompatActivity {
         }
 
 
-        // Display the message
+
         textViewComparisonMessage.setText(comparisonMessage);
     }
 
@@ -128,8 +128,5 @@ public class AverageCarbonFootprintUK extends AppCompatActivity {
     }
 
 
-
-
-        // Log individual results
 
 }

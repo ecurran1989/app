@@ -51,7 +51,7 @@
         android:layout_below="@id/editTextMeatConsumed"
         android:layout_marginTop="16dp"
         android:background="#4CAF50"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/text_selector" />
 
     <TextView
         android:id="@+id/textViewResult"
@@ -71,6 +71,6 @@
         android:layout_below="@id/textViewResult"
         android:layout_marginTop="16dp"
         android:background="#4CAF50"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/text_selector" />
 
 </RelativeLayout>
