@@ -228,6 +228,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Define keywords for recycling centers
         List<String> keywordList = Arrays.asList("recycling", "civic amenity", "bin", "skips", "waste");
 
+        // Get the user's current location
+        LatLng userLocation = getLastKnownLocation();
+
         // Iterate through keywords and fetch places
         for (String keyword : keywordList) {
             // Create a FindCurrentPlaceRequest for the current keyword
@@ -253,7 +256,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             // Check if the place is a recycling center
                             if (isLikelyRecyclingCenter(place)) {
-                                // Add a custom marker for each nearby recycling center
+                                // Add a green custom marker for each nearby recycling center
                                 addCustomMarker(placeLatLng, place.getName());
                             }
                         }
@@ -269,8 +272,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         // Move the camera to the user's location
-        LatLng userLocation = getLastKnownLocation();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10.0f));
+    }
+
+
+
+    private double calculateDistance(LatLng origin, LatLng destination) {
+        // Use the Haversine formula to calculate distance between two points on the Earth
+        double lat1 = Math.toRadians(origin.latitude);
+        double lon1 = Math.toRadians(origin.longitude);
+        double lat2 = Math.toRadians(destination.latitude);
+        double lon2 = Math.toRadians(destination.longitude);
+
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+
+        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        // Radius of the Earth in miles
+        double radiusOfEarth = 3958.8;
+
+        // Calculate the distance
+        return radiusOfEarth * c;
     }
 
 
