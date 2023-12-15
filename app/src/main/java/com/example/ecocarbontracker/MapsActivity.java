@@ -37,10 +37,12 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -53,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private PlacesClient placesClient;
     private Toast locationToast;
+    private static final int MAX_MARKERS_TO_SHOW = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,13 +228,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void fetchNearbyRecyclingCenters() {
-        // Define keywords for recycling centers
-        List<String> keywordList = Arrays.asList("recycling", "civic amenity", "bin", "skips", "waste");
-
         // Get the user's current location
         LatLng userLocation = getLastKnownLocation();
 
-        // Iterate through keywords and fetch places
+        // Define keywords for recycling centers
+        List<String> keywordList = Arrays.asList("recycling", "civic amenity", "bin", "skips", "waste");
+
+        // Create a list to store all recycling places
+        List<Place> allRecyclingPlaces = new ArrayList<>();
+
+        // Counter to keep track of completed API calls
+        AtomicInteger counter = new AtomicInteger(keywordList.size());
+
+
         for (String keyword : keywordList) {
             // Create a FindCurrentPlaceRequest for the current keyword
             FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(
@@ -239,7 +248,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             );
 
             // Perform the place request
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Handle the case where the user hasn't granted the location permission.
                 return;
             }
@@ -256,6 +265,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             // Check if the place is a recycling center
                             if (isLikelyRecyclingCenter(place)) {
+                                // Add the place to the list
+                                allRecyclingPlaces.add(place);
+
                                 // Add a green custom marker for each nearby recycling center
                                 addCustomMarker(placeLatLng, place.getName());
                             }
@@ -268,12 +280,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.e("PlacesAPI", "Place request failed: " + exception.getMessage());
                     }
                 }
+
+                // Decrement the counter and check if all API calls are completed
+                if (counter.decrementAndGet() == 0) {
+                    // All API calls are completed, proceed with sorting and displaying markers
+
+                    // Move the camera to the user's location
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12.0f));
+
+                    // Sort the list of recycling places by distance
+                    Collections.sort(allRecyclingPlaces, (place1, place2) -> {
+                        double distance1 = calculateDistance(userLocation, new LatLng(place1.getLatLng().latitude, place1.getLatLng().longitude));
+                        double distance2 = calculateDistance(userLocation, new LatLng(place2.getLatLng().latitude, place2.getLatLng().longitude));
+                        return Double.compare(distance1, distance2);
+                    });
+
+                    // Show additional custom markers for the closest recycling places (up to a certain limit)
+                    int markersToShow = Math.min(allRecyclingPlaces.size(), MAX_MARKERS_TO_SHOW);
+                    for (int i = 1; i < markersToShow; i++) {
+                        Place additionalPlace = allRecyclingPlaces.get(i);
+                        LatLng additionalPlaceLatLng = new LatLng(
+                                additionalPlace.getLatLng().latitude,
+                                additionalPlace.getLatLng().longitude);
+
+                        // Add a blue custom marker for additional nearby recycling centers
+                        addCustomMarker(additionalPlaceLatLng, additionalPlace.getName());
+                    }
+                }
             });
         }
-
-        // Move the camera to the user's location
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10.0f));
     }
+
+
+
 
 
 
